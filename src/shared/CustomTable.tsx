@@ -81,7 +81,10 @@ export const CustomTable: FC<ITableProps> = ({
           {rows.map((row) => (
             <TableRow
               key={row.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{
+                cursor: "pointer",
+              }}
+              // sx={{  }}
               onClick={() => handleItem(row.id)}
             >
               <TableCell component="th" scope="row">

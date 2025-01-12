@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store.ts";
 import { IClient } from "../../features/clients/clientsSlice.ts";
 import { CustomTable, HeadCell, Order } from "../../shared/CustomTable.tsx";
+import { CLIENTS_URL, NOTFOUND_URL } from "../../app/routing.ts";
+import { useNavigate } from "react-router";
 
 const headCells: readonly HeadCell[] = [
   {
@@ -22,6 +24,7 @@ const headCells: readonly HeadCell[] = [
 export const Home: FC = () => {
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof IClient>("id");
+  const navigate = useNavigate();
   const clients: IClient[] = useSelector(
     (state: RootState) => state.clients.items,
   );
@@ -41,7 +44,7 @@ export const Home: FC = () => {
   };
 
   const handleItem = (id: number) => {
-    console.log(id);
+    navigate(`/${CLIENTS_URL}/${id}`);
   };
 
   const visibleClients = [...clients].sort(getSort);
