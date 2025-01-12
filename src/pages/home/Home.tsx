@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store.ts";
 import { IClient } from "../../features/clients/clientsSlice.ts";
 import { CustomTable, HeadCell, Order } from "../../shared/CustomTable.tsx";
-import { CLIENTS_URL, NOTFOUND_URL } from "../../app/routing.ts";
+import { CLIENTS_URL } from "../../app/routing.ts";
 import { useNavigate } from "react-router";
 
 const headCells: readonly HeadCell[] = [

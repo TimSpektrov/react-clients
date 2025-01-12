@@ -126,9 +126,8 @@ export const Header: FC = () => {
                 <MenuItem key={button.id} onClick={handleCloseNavMenu}>
                   <Button
                     key={button.id}
-                    component={button?.href ? Link : "button"}
-                    href={button?.href}
-                    onClick={button?.onClick}
+                    component={"button"}
+                    onClick={button.onClick}
                     variant="text"
                     aria-label={button.label}
                   >
