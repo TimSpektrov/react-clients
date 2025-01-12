@@ -5,7 +5,6 @@ import { deleteClient, IClient } from "../features/clients/clientsSlice.ts";
 import { RootState } from "../app/store.ts";
 import {
   CLIENTS_URL,
-  CREATE_URL,
   EDIT_URL,
   HOME_URL,
   NOTFOUND_URL,

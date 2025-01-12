@@ -2,9 +2,7 @@ import { FC, HTMLInputTypeAttribute } from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { IClient } from "../features/clients/clientsSlice.ts";
 import { useForm } from "react-hook-form";
-import { TextFieldElement } from "react-hook-form-mui";
-import { Simulate } from "react-dom/test-utils";
-import reset = Simulate.reset;
+import { TextareaAutosizeElement, TextFieldElement } from "react-hook-form-mui";
 
 export interface IField {
   id: keyof IClient;
@@ -13,6 +11,7 @@ export interface IField {
   placeholder?: string;
   errorMessage?: string;
   type: HTMLInputTypeAttribute;
+  initialValue: string;
 }
 
 type TDataInput = {
@@ -22,14 +21,20 @@ export interface ICustomFormProps {
   fields: IField[];
   onSubmit: (data: TDataInput[]) => void;
   title?: string;
+  buttonTitle?: string;
 }
 
 export const CustomForm: FC<ICustomFormProps> = ({
   title,
   fields,
   onSubmit,
+  buttonTitle = "Сохранить",
 }) => {
-  const { handleSubmit, control, reset } = useForm();
+  const defaultValues = {};
+  fields.forEach((item) => {
+    defaultValues[item.id] = item.initialValue;
+  });
+  const { handleSubmit, control, reset } = useForm({ defaultValues });
   const formSubmit = (data) => {
     for (let field in data) {
       if (data[field] === undefined) data[field] = "";
@@ -54,22 +59,35 @@ export const CustomForm: FC<ICustomFormProps> = ({
       )}
       <form onSubmit={handleSubmit(formSubmit)} noValidate>
         <Stack spacing={2}>
-          {fields.map((field) => (
-            <TextFieldElement
-              name={field.id}
-              label={field.label}
-              control={control}
-              required={field.required}
-              fullWidth
-              key={field.id}
-              type={field.type}
-              rules={{
-                required: field.required ? field.errorMessage : false,
-              }}
-            />
-          ))}
+          {fields.map((field) =>
+            field.type === "textarea" ? (
+              <TextareaAutosizeElement
+                name={field.id}
+                label={field.label}
+                control={control}
+                fullWidth
+                key={field.id}
+                rules={{
+                  required: field.required ? field.errorMessage : false,
+                }}
+              />
+            ) : (
+              <TextFieldElement
+                name={field.id}
+                label={field.label}
+                control={control}
+                required={field.required}
+                fullWidth
+                key={field.id}
+                type={field.type}
+                rules={{
+                  required: field.required ? field.errorMessage : false,
+                }}
+              />
+            ),
+          )}
           <Button type={"submit"} color={"primary"}>
-            Submit
+            {buttonTitle}
           </Button>
         </Stack>
       </form>

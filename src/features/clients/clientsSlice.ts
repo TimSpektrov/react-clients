@@ -170,14 +170,25 @@ export const clientsSlice = createSlice({
     },
     deleteClient: (state, action: PayloadAction<string>) => {
       const index = state.items.findIndex((item) => item.id === action.payload);
+      console.log(index);
       if (index !== -1) {
         state.items.splice(index, 1);
+      }
+    },
+    updateClient: (state, action: PayloadAction<IClient>) => {
+      const index = state.items.findIndex(
+        (item) => String(item.id) == String(action.payload.id),
+      );
+      console.log(index);
+      if (index !== -1) {
+        state.items[index] = action.payload;
       }
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { createClient, deleteClient } = clientsSlice.actions;
+export const { createClient, deleteClient, updateClient } =
+  clientsSlice.actions;
 
 export default clientsSlice.reducer;

@@ -1,9 +1,7 @@
 import { FC } from "react";
 import { CustomForm, IField } from "../../shared/CustomForm.tsx";
-import { Simulate } from "react-dom/test-utils";
-import { useDispatch, useSelector } from "react-redux";
-import { createClient, IClient } from "../../features/clients/clientsSlice.ts";
-import { RootState } from "../../app/store.ts";
+import { useDispatch } from "react-redux";
+import { createClient } from "../../features/clients/clientsSlice.ts";
 
 export const CreateClient: FC = () => {
   const fields: IField[] = [
@@ -14,6 +12,7 @@ export const CreateClient: FC = () => {
       placeholder: "Евгений",
       errorMessage: "Введите имя",
       type: "text",
+      initialValue: "",
     },
     {
       id: "company",
@@ -21,6 +20,7 @@ export const CreateClient: FC = () => {
       placeholder: "Microsoft",
       errorMessage: "Введите название компании",
       type: "text",
+      initialValue: "",
     },
     {
       id: "contacts",
@@ -29,13 +29,20 @@ export const CreateClient: FC = () => {
       placeholder: "example@mail.com",
       errorMessage: "Введите контакт",
       type: "text",
+      initialValue: "",
+    },
+    {
+      id: "description",
+      required: false,
+      label: "Заметки",
+      placeholder: "Введите заметку",
+      errorMessage: "",
+      type: "textarea",
+      initialValue: "",
     },
   ];
   const dispatch = useDispatch();
-  const clients: IClient[] = useSelector(
-    (state: RootState) => state.clients.items,
-  );
-  console.log(clients);
+
   const formSubmit = (data) => {
     dispatch(createClient(data));
   };
