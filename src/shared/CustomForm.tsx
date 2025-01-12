@@ -1,8 +1,10 @@
-import { FC } from "react";
+import { FC, HTMLInputTypeAttribute } from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { IClient } from "../features/clients/clientsSlice.ts";
 import { useForm } from "react-hook-form";
 import { TextFieldElement } from "react-hook-form-mui";
+import { Simulate } from "react-dom/test-utils";
+import reset = Simulate.reset;
 
 export interface IField {
   id: keyof IClient;
@@ -10,6 +12,7 @@ export interface IField {
   label: string;
   placeholder?: string;
   errorMessage?: string;
+  type: HTMLInputTypeAttribute;
 }
 
 type TDataInput = {
@@ -26,9 +29,13 @@ export const CustomForm: FC<ICustomFormProps> = ({
   fields,
   onSubmit,
 }) => {
-  const { handleSubmit, control } = useForm();
+  const { handleSubmit, control, reset } = useForm();
   const formSubmit = (data) => {
+    for (let field in data) {
+      if (data[field] === undefined) data[field] = "";
+    }
     onSubmit(data);
+    reset();
   };
 
   return (
@@ -55,6 +62,7 @@ export const CustomForm: FC<ICustomFormProps> = ({
               required={field.required}
               fullWidth
               key={field.id}
+              type={field.type}
               rules={{
                 required: field.required ? field.errorMessage : false,
               }}
