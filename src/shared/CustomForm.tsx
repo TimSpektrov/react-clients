@@ -1,17 +1,15 @@
 import { FC, HTMLInputTypeAttribute } from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { IClient } from "../features/clients/clientsSlice.ts";
 import { useForm } from "react-hook-form";
 import { TextareaAutosizeElement, TextFieldElement } from "react-hook-form-mui";
 
 export interface IField {
-  id: keyof IClient;
+  id: string;
   required?: boolean;
   label: string;
   placeholder?: string;
   errorMessage?: string;
   type: HTMLInputTypeAttribute;
-  initialValue: string;
 }
 
 type TDataInput = {
@@ -22,6 +20,9 @@ export interface ICustomFormProps {
   onSubmit: (data: TDataInput[]) => void;
   title?: string;
   buttonTitle?: string;
+  defaultValues?: {
+    [key: string]: any;
+  };
 }
 
 export const CustomForm: FC<ICustomFormProps> = ({
@@ -29,11 +30,8 @@ export const CustomForm: FC<ICustomFormProps> = ({
   fields,
   onSubmit,
   buttonTitle = "Сохранить",
+  defaultValues,
 }) => {
-  const defaultValues = {};
-  fields.forEach((item) => {
-    defaultValues[item.id] = item.initialValue;
-  });
   const { handleSubmit, control, reset } = useForm({ defaultValues });
   const formSubmit = (data) => {
     for (let field in data) {
@@ -44,14 +42,7 @@ export const CustomForm: FC<ICustomFormProps> = ({
   };
 
   return (
-    <Box
-      component="section"
-      sx={{
-        maxWidth: "800px",
-        margin: "0 auto",
-        padding: "16px",
-      }}
-    >
+    <>
       {title && (
         <Typography variant="h2" gutterBottom>
           {title}
@@ -86,11 +77,11 @@ export const CustomForm: FC<ICustomFormProps> = ({
               />
             ),
           )}
-          <Button type={"submit"} color={"primary"}>
+          <Button type={"submit"} color={"primary"} variant={"contained"}>
             {buttonTitle}
           </Button>
         </Stack>
       </form>
-    </Box>
+    </>
   );
 };

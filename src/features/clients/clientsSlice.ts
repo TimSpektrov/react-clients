@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
-import { AddReaction } from "@mui/icons-material";
 
 export interface IClient {
   id: number | string;
@@ -181,7 +180,7 @@ export const clientsSlice = createSlice({
       );
       console.log(index);
       if (index !== -1) {
-        state.items[index] = action.payload;
+        state.items[index] = { ...state.items[index], ...action.payload };
       }
     },
   },

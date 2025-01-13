@@ -12,7 +12,6 @@ export const CreateClient: FC = () => {
       placeholder: "Евгений",
       errorMessage: "Введите имя",
       type: "text",
-      initialValue: "",
     },
     {
       id: "company",
@@ -20,7 +19,6 @@ export const CreateClient: FC = () => {
       placeholder: "Microsoft",
       errorMessage: "Введите название компании",
       type: "text",
-      initialValue: "",
     },
     {
       id: "contacts",
@@ -29,7 +27,6 @@ export const CreateClient: FC = () => {
       placeholder: "example@mail.com",
       errorMessage: "Введите контакт",
       type: "text",
-      initialValue: "",
     },
     {
       id: "description",
@@ -38,7 +35,6 @@ export const CreateClient: FC = () => {
       placeholder: "Введите заметку",
       errorMessage: "",
       type: "textarea",
-      initialValue: "",
     },
   ];
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { CustomForm, IField } from "../../shared/CustomForm.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { IClient, updateClient } from "../../features/clients/clientsSlice.ts";
@@ -30,7 +30,6 @@ export const EditClient: FC = () => {
       placeholder: "Евгений",
       errorMessage: "Введите имя",
       type: "text",
-      initialValue: item.name,
     },
     {
       id: "company",
@@ -38,7 +37,6 @@ export const EditClient: FC = () => {
       placeholder: "Microsoft",
       errorMessage: "Введите название компании",
       type: "text",
-      initialValue: item.company,
     },
     {
       id: "contacts",
@@ -47,7 +45,6 @@ export const EditClient: FC = () => {
       placeholder: "example@mail.com",
       errorMessage: "Введите контакт",
       type: "text",
-      initialValue: item.contacts,
     },
     {
       id: "description",
@@ -56,7 +53,6 @@ export const EditClient: FC = () => {
       placeholder: "Введите заметку",
       errorMessage: "",
       type: "textarea",
-      initialValue: item.description,
     },
   ];
 
@@ -69,6 +65,7 @@ export const EditClient: FC = () => {
       fields={fields}
       onSubmit={formSubmit}
       title={"Создать клиента"}
+      defaultValues={item}
     />
   );
 };
