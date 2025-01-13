@@ -6,9 +6,10 @@ import { AUTH_URL } from "../app/routing.ts";
 import { Box } from "@mui/material";
 import { clearError } from "../features/users/usersSlice.ts";
 import { setClients } from "../features/clients/clientsSlice.ts";
+import { RootState } from "../app/store.ts";
 
 export const Layout: FC = () => {
-  const { id, error } = useSelector((state) => state.user.user);
+  const { id, error } = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -25,7 +26,9 @@ export const Layout: FC = () => {
   }, [pathname]);
 
   useEffect(() => {
-    dispatch(setClients(id));
+    if (id) {
+      dispatch(setClients(id));
+    }
   }, [id]);
   return (
     <>

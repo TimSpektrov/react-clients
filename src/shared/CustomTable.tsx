@@ -29,7 +29,7 @@ export interface ITableProps {
   rows: IClient[];
   sort: ISortTable;
   onSort: (property: keyof IClient) => void;
-  onItemClick: (id: number) => void;
+  onItemClick: (id) => void;
 }
 export const CustomTable: FC<ITableProps> = ({
   headCells,
@@ -42,7 +42,7 @@ export const CustomTable: FC<ITableProps> = ({
     onSort(property);
   };
 
-  const handleItem = (id: number) => {
+  const handleItem = (id) => {
     onItemClick(id);
   };
 
@@ -78,7 +78,7 @@ export const CustomTable: FC<ITableProps> = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row: IClient) => (
             <TableRow
               key={row.id}
               sx={{

@@ -4,13 +4,13 @@ import { nanoid } from "nanoid";
 import { DBUsers } from "../../app/db.ts";
 
 export interface IUser {
-  id: number | string;
+  id: string;
   username: string;
   password: string;
 }
 
 export interface UserState {
-  users: IUser[];
+  // users: IUser[];
   user: {
     id: string | null;
     error: string | null;
@@ -18,7 +18,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  users: [],
+  // users: [],
   user: {
     id: null,
     error: null,
@@ -36,7 +36,7 @@ export const userSlice = createSlice({
       const localUsers = localStorage.getItem("users");
       const users = localUsers ? JSON.parse(localUsers) : [...DBUsers];
       const item = users.find(
-        (user) => user.username === action.payload.username,
+        (user: IUser) => user.username === action.payload.username,
       );
       if (item || !action.payload.password) {
         state.user.id = null;

@@ -10,7 +10,7 @@ export const DBUsers: IUser[] = [
 ];
 export const DBClients: IClient[] = [
   {
-    id: 1,
+    id: "1",
     name: "Alice Smith",
     company: "Tech Innovations",
     contacts: "alice@techinnovations.com",
@@ -18,7 +18,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 2,
+    id: "2",
     name: "Bob Johnson",
     company: "Creative Solutions",
     contacts: "bob@creativesolutions.com",
@@ -26,7 +26,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 3,
+    id: "3",
     name: "Charlie Brown",
     company: "Web Services Inc.",
     contacts: "charlie@webservices.com",
@@ -34,7 +34,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 4,
+    id: "4",
     name: "Diana Prince",
     company: "Marketing Gurus",
     contacts: "diana@marketinggurus.com",
@@ -42,7 +42,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 5,
+    id: "5",
     name: "Edward Elric",
     company: "Alchemy Corp",
     contacts: "edward@alchemycorp.com",
@@ -50,7 +50,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 6,
+    id: "6",
     name: "Fiona Glenanne",
     company: "Security Experts",
     contacts: "fiona@securityexperts.com",
@@ -58,7 +58,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 7,
+    id: "7",
     name: "George Washington",
     company: "Finance Solutions",
     contacts: "george@financesolutions.com",
@@ -66,7 +66,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 8,
+    id: "8",
     name: "Hannah Montana",
     company: "Entertainment LLC",
     contacts: "hannah@entertainmentllc.com",
@@ -74,7 +74,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 9,
+    id: "9",
     name: "Isaac Newton",
     company: "Scientific Research",
     contacts: "isaac@scientificresearch.com",
@@ -82,7 +82,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 10,
+    id: "10",
     name: "Jack Sparrow",
     company: "Pirate Ventures",
     contacts: "jack@pirateventures.com",
@@ -90,7 +90,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 11,
+    id: "11",
     name: "Katherine Johnson",
     company: "Data Analytics",
     contacts: "katherine@dataanalytics.com",
@@ -98,7 +98,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 12,
+    id: "12",
     name: "Liam Neeson",
     company: "Film Productions",
     contacts: "liam@filmproductions.com",
@@ -106,7 +106,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 13,
+    id: "13",
     name: "Mona Lisa",
     company: "Art Gallery",
     contacts: "mona@artgallery.com",
@@ -114,7 +114,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 14,
+    id: "14",
     name: "Nathan Drake",
     company: "Adventure Co.",
     contacts: "nathan@adventureco.com",
@@ -122,7 +122,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 15,
+    id: "15",
     name: "Olivia Pope",
     company: "Legal Advisors",
     contacts: "olivia@legaladvisors.com",
@@ -130,7 +130,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 16,
+    id: "16",
     name: "Peter Parker",
     company: "Photography Studio",
     contacts: "peter@photographystudio.com",
@@ -138,7 +138,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 17,
+    id: "17",
     name: "Quinn Fabray",
     company: "Fashion House",
     contacts: "quinn@fashionhouse.com",
@@ -146,7 +146,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 18,
+    id: "18",
     name: "Robert Langdon",
     company: "Mystery Consultants",
     contacts: "robert@mysteryconsultants.com",
@@ -154,7 +154,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 19,
+    id: "19",
     name: "Sarah Connor",
     company: "Tech Solutions",
     contacts: "sarah@techsolutions.com",
@@ -162,7 +162,7 @@ export const DBClients: IClient[] = [
     userId: "bvfdvfvgf",
   },
   {
-    id: 20,
+    id: "20",
     name: "Tony Stark",
     company: "Stark Industries",
     contacts: "tony@starkindustries.com",

@@ -1,7 +1,9 @@
 import { FC, HTMLInputTypeAttribute } from "react";
-import { Box, Button, Stack, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Button, Stack, Typography } from "@mui/material";
+import { FieldValues, useForm, UseFormProps } from "react-hook-form";
 import { TextareaAutosizeElement, TextFieldElement } from "react-hook-form-mui";
+import { IClient } from "../features/clients/clientsSlice.ts";
+import { IUser } from "../features/users/usersSlice.ts";
 
 export interface IField {
   id: string;
@@ -9,20 +11,15 @@ export interface IField {
   label: string;
   placeholder?: string;
   errorMessage?: string;
-  type: HTMLInputTypeAttribute;
+  type: HTMLInputTypeAttribute | "textarea";
 }
 
-type TDataInput = {
-  [key: string]: string;
-};
 export interface ICustomFormProps {
   fields: IField[];
-  onSubmit: (data: TDataInput[]) => void;
   title?: string;
   buttonTitle?: string;
-  defaultValues?: {
-    [key: string]: any;
-  };
+  defaultValues: UseFormProps<FieldValues, any> | undefined;
+  onSubmit: (data: Partial<IClient> | Partial<IUser>) => void;
 }
 
 export const CustomForm: FC<ICustomFormProps> = ({
@@ -59,7 +56,7 @@ export const CustomForm: FC<ICustomFormProps> = ({
                 fullWidth
                 key={field.id}
                 rules={{
-                  required: field.required ? field.errorMessage : false,
+                  required: field.required && field.errorMessage,
                 }}
               />
             ) : (
@@ -72,7 +69,7 @@ export const CustomForm: FC<ICustomFormProps> = ({
                 key={field.id}
                 type={field.type}
                 rules={{
-                  required: field.required ? field.errorMessage : false,
+                  required: field?.required ? field.errorMessage : false,
                 }}
               />
             ),

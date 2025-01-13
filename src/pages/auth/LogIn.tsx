@@ -5,6 +5,7 @@ import { login } from "../../features/users/usersSlice.ts";
 import { useNavigate } from "react-router";
 import { Button, Typography } from "@mui/material";
 import { AUTH_URL, REGISTRATION_URL } from "../../app/routing.ts";
+import { RootState } from "../../app/store.ts";
 
 export const LogIn: FC = () => {
   const fields: IField[] = [
@@ -27,7 +28,7 @@ export const LogIn: FC = () => {
   ];
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id, error } = useSelector((state) => state.user.user);
+  const { id, error } = useSelector((state: RootState) => state.user.user);
 
   if (id) {
     navigate(`/`);
@@ -50,7 +51,12 @@ export const LogIn: FC = () => {
       >
         {error}
       </Typography>
-      <CustomForm fields={fields} onSubmit={formSubmit} buttonTitle={"войти"} />
+      <CustomForm
+        fields={fields}
+        onSubmit={formSubmit}
+        buttonTitle={"войти"}
+        defaultValues={{ username: "", password: "" }}
+      />
       <Button
         component={"a"}
         color={"warning"}

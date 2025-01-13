@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { MouseEvent, FC, useState } from "react";
 import {
   AddBox,
   ArrowBack,
@@ -14,10 +14,8 @@ import {
   Button,
   Container,
   IconButton,
-  Link,
   Menu,
   MenuItem,
-  Stack,
   Toolbar,
   Tooltip,
   Typography,
@@ -28,13 +26,15 @@ import { logout } from "../features/users/usersSlice.ts";
 
 export const Header: FC = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<
+    null | HTMLElement | undefined
+  >(null);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+    setAnchorElNav(event.currentTarget as HTMLElement);
   };
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
+    setAnchorElUser(event.currentTarget as HTMLElement);
   };
 
   const handleCloseNavMenu = () => {
@@ -78,7 +78,6 @@ export const Header: FC = () => {
       },
     },
   ];
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const userMenu = [
     {
       label: "Выйти",
@@ -193,7 +192,6 @@ export const Header: FC = () => {
               </Button>
             ))}
           </Box>
-          {/*TODO доделать личный кабинет*/}
           <Box sx={{ flexGrow: 0 }}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />

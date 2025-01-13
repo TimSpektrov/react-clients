@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { CustomForm, IField } from "../../shared/CustomForm.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { createClient } from "../../features/clients/clientsSlice.ts";
+import { createClient, IClient } from "../../features/clients/clientsSlice.ts";
 import { useNavigate } from "react-router";
 import { CLIENTS_URL } from "../../app/routing.ts";
+import { RootState } from "../../app/store.ts";
 
 export const CreateClient: FC = () => {
   const fields: IField[] = [
@@ -40,10 +41,12 @@ export const CreateClient: FC = () => {
     },
   ];
   const dispatch = useDispatch();
-  const { id } = useSelector((state) => state.user.user);
+  const { id } = useSelector((state: RootState) => state.user.user);
   const navigate = useNavigate();
 
-  const formSubmit = (data) => {
+  const formSubmit = (
+    data: Pick<IClient, "name" | "company" | "contacts" | "description">,
+  ) => {
     dispatch(createClient({ ...data, userId: id }));
     navigate(`/${CLIENTS_URL}`);
   };
@@ -51,6 +54,7 @@ export const CreateClient: FC = () => {
     <CustomForm
       fields={fields}
       onSubmit={formSubmit}
+      defaultValues={{ name: "", company: "", contacts: "", description: "" }}
       title={"Создать клиента"}
     />
   );

@@ -13,13 +13,12 @@ import {
   Box,
   Button,
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   Tooltip,
   Typography,
 } from "@mui/material";
-import { AddBox, ArrowBack, Delete, Edit, Home } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 
 export const ClientProfile: FC = () => {
   const { id } = useParams();

@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { CustomForm, IField } from "../../shared/CustomForm.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { login, registration } from "../../features/users/usersSlice.ts";
+import { registration } from "../../features/users/usersSlice.ts";
 import { useNavigate } from "react-router";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import { RootState } from "../../app/store.ts";
 
 export const Registration: FC = () => {
   const fields: IField[] = [
@@ -26,7 +27,7 @@ export const Registration: FC = () => {
   ];
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id, error } = useSelector((state) => state.user.user);
+  const { id, error } = useSelector((state: RootState) => state.user.user);
 
   if (id) {
     navigate(`/`);
@@ -46,6 +47,7 @@ export const Registration: FC = () => {
       </Typography>
       <CustomForm
         fields={fields}
+        defaultValues={{ username: "", password: "" }}
         onSubmit={formSubmit}
         buttonTitle={"зарегистрироваться"}
       />

@@ -5,7 +5,7 @@ import { IUser } from "../users/usersSlice.ts";
 import { DBClients } from "../../app/db.ts";
 
 export interface IClient {
-  id: number | string;
+  id: string;
   name: string;
   company: string;
   contacts: string;
@@ -24,12 +24,12 @@ export const clientsSlice = createSlice({
   name: "clients",
   initialState,
   reducers: {
-    setClients: (state, action: PayloadAction<Pick<IUser, "id">>) => {
+    setClients: (state, action: PayloadAction<Pick<IUser, "id"> | string>) => {
       const localClients = localStorage.getItem("clients");
       const clients = localClients ? JSON.parse(localClients) : [...DBClients];
       state.items = clients.filter((item) => item.userId === action.payload);
     },
-    createClient: (state, action: PayloadAction<IClient>) => {
+    createClient: (state, action: PayloadAction<Partial<IClient>>) => {
       const item = action.payload;
       const id = nanoid();
       state.items.push({ ...item, id });
@@ -40,7 +40,10 @@ export const clientsSlice = createSlice({
         JSON.stringify([...clients, { ...item, id }]),
       );
     },
-    deleteClient: (state, action: PayloadAction<Pick<IUser, "id">>) => {
+    deleteClient: (
+      state,
+      action: PayloadAction<Pick<IUser, "id"> | string>,
+    ) => {
       const index = state.items.findIndex((item) => item.id === action.payload);
       console.log(index);
       if (index !== -1) {
@@ -55,7 +58,7 @@ export const clientsSlice = createSlice({
     },
     updateClient: (state, action: PayloadAction<IClient>) => {
       const index = state.items.findIndex(
-        (item) => String(item.id) == String(action.payload.id),
+        (item) => item.id === action.payload.id,
       );
       if (index !== -1) {
         state.items[index] = { ...state.items[index], ...action.payload };
@@ -63,7 +66,7 @@ export const clientsSlice = createSlice({
       const localClients = localStorage.getItem("clients");
       const clients = localClients ? JSON.parse(localClients) : [...DBClients];
       const locIndex = clients.findIndex(
-        (item) => String(item.id) == String(action.payload.id),
+        (item: IClient) => item.id == action.payload.id,
       );
       if (locIndex !== -1) {
         clients[locIndex] = { ...clients[locIndex], ...action.payload };
