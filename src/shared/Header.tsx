@@ -22,9 +22,9 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { useNavigate } from "react-router";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useLocation, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { logout } from "../features/users/usersSlice.ts";
 
 export const Header: FC = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -45,13 +45,16 @@ export const Header: FC = () => {
     setAnchorElUser(null);
   };
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   const buttons = [
     {
       id: "back",
       label: "Назад",
       icon: <ArrowBack />,
+      disabled: false,
       onClick: () => {
         navigate(-1);
       },
@@ -60,6 +63,7 @@ export const Header: FC = () => {
       id: "home",
       label: "На главную",
       icon: <Home />,
+      disabled: pathname === HOME_URL,
       onClick: () => {
         navigate(HOME_URL);
       },
@@ -68,8 +72,19 @@ export const Header: FC = () => {
       id: "createClient",
       label: "Создать нового клиента",
       icon: <AddBox />,
+      disabled: pathname === `/${CLIENTS_URL}/${CREATE_URL}`,
       onClick: () => {
         navigate(`/${CLIENTS_URL}/${CREATE_URL}`);
+      },
+    },
+  ];
+  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const userMenu = [
+    {
+      label: "Выйти",
+      id: "logout",
+      onClick: () => {
+        dispatch(logout());
       },
     },
   ];
@@ -123,7 +138,11 @@ export const Header: FC = () => {
               sx={{ display: { xs: "block", md: "none" } }}
             >
               {buttons.map((button) => (
-                <MenuItem key={button.id} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={button.id}
+                  onClick={handleCloseNavMenu}
+                  sx={{ display: button.disabled ? "none" : "block" }}
+                >
                   <Button
                     key={button.id}
                     component={"button"}
@@ -165,7 +184,10 @@ export const Header: FC = () => {
                 variant="text"
                 size="small"
                 aria-label={button.label}
-                sx={{ color: "white" }}
+                disabled={button.disabled}
+                sx={{
+                  color: "white",
+                }}
               >
                 <Tooltip title={button.label}>{button.icon}</Tooltip>
               </Button>
@@ -173,11 +195,9 @@ export const Header: FC = () => {
           </Box>
           {/*TODO доделать личный кабинет*/}
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -194,10 +214,13 @@ export const Header: FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: "center" }}>
-                    {setting}
+              {userMenu.map((item) => (
+                <MenuItem key={item.id} onClick={handleCloseUserMenu}>
+                  <Typography
+                    sx={{ textAlign: "center" }}
+                    onClick={item.onClick}
+                  >
+                    {item.label}
                   </Typography>
                 </MenuItem>
               ))}

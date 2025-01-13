@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AUTH_URL } from "../app/routing.ts";
 import { Box } from "@mui/material";
 import { clearError } from "../features/users/usersSlice.ts";
+import { setClients } from "../features/clients/clientsSlice.ts";
 
 export const Layout: FC = () => {
   const { id, error } = useSelector((state) => state.user.user);
@@ -22,6 +23,10 @@ export const Layout: FC = () => {
       dispatch(clearError());
     }
   }, [pathname]);
+
+  useEffect(() => {
+    dispatch(setClients(id));
+  }, [id]);
   return (
     <>
       <Header />
